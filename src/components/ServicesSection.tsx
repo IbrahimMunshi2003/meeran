@@ -5,25 +5,25 @@ const services = [
     icon: Sparkles,
     title: "Skin Care",
     description: "Rejuvenating facials and treatments for radiant, youthful skin.",
-    price: "From $120",
+    price: "From ₹2,500",
   },
   {
     icon: Scissors,
     title: "Hair Styling",
     description: "Expert cuts, coloring, and styling for your perfect look.",
-    price: "From $85",
+    price: "From ₹1,500",
   },
   {
     icon: Heart,
     title: "Makeup Artistry",
     description: "Professional makeup for any occasion, from bridal to editorial.",
-    price: "From $150",
+    price: "From ₹3,000",
   },
   {
     icon: Flower2,
     title: "Spa Treatments",
     description: "Luxurious body treatments for complete relaxation and renewal.",
-    price: "From $200",
+    price: "From ₹4,000",
   },
 ];
 
@@ -83,16 +83,6 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* View All Link */}
-        <div className="text-center mt-12">
-          <a
-            href="#"
-            className="inline-flex items-center text-primary font-body text-sm tracking-widest uppercase hover:text-gold-light transition-colors group"
-          >
-            View All Services
-            <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-        </div>
       </div>
 
       {/* Bottom Border */}

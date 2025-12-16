@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
+  const { toast } = useToast();
   return (
     <section id="contact" className="py-24 bg-card relative">
       {/* Top Border */}
@@ -139,7 +141,18 @@ const ContactSection = () => {
                 />
               </div>
 
-              <Button variant="gold" size="lg" className="w-full">
+              <Button
+                type="button"
+                variant="gold"
+                size="lg"
+                className="w-full"
+                onClick={() => {
+                  toast({
+                    title: "Appointment booked successfully!",
+                    description: "We will contact you shortly to confirm your appointment.",
+                  });
+                }}
+              >
                 Send Request
               </Button>
             </form>
