@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import salonImage from "@/assets/salon-interior.jpg";
 
 const AboutSection = () => {
   return (
@@ -9,11 +10,11 @@ const AboutSection = () => {
           <div className="relative">
             <div className="relative z-10">
               <div className="aspect-[4/5] bg-charcoal-light overflow-hidden">
-                <div 
-                  className="w-full h-full bg-gradient-to-br from-primary/20 to-charcoal flex items-center justify-center"
-                >
-                  <span className="font-heading text-6xl text-primary/30 italic">LB</span>
-                </div>
+                <img 
+                  src={salonImage}
+                  alt="Kanishka Beauty Parlour luxury interior"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             {/* Decorative Frame */}
@@ -33,13 +34,13 @@ const AboutSection = () => {
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
               <p>
-                Founded in 2009, Luxe Beauty has been at the forefront of the luxury beauty 
-                industry, setting standards for excellence and innovation. Our philosophy 
+                Founded with a passion for beauty and excellence, Kanishka Beauty Parlour 
+                has been at the forefront of the luxury beauty industry. Our philosophy 
                 centers on enhancing your natural beauty while providing an unparalleled 
                 experience of relaxation and rejuvenation.
               </p>
               <p>
-                Our team of internationally trained experts combines cutting-edge techniques 
+                Our team of professionally trained experts combines cutting-edge techniques 
                 with time-honored traditions, using only the finest products to deliver 
                 results that exceed expectations.
               </p>

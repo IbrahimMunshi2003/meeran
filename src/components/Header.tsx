@@ -18,8 +18,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" className="flex items-center space-x-2">
-            <span className="font-heading text-2xl md:text-3xl font-semibold tracking-wide text-gradient-gold">
-              LUXE BEAUTY
+            <span className="font-heading text-xl md:text-2xl font-semibold tracking-wide text-gradient-gold">
+              Kanishka Beauty Parlour
             </span>
           </a>
 

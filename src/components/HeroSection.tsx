@@ -52,12 +52,16 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 animate-fade-up"
             style={{ animationDelay: "0.8s" }}
           >
-            <Button variant="gold" size="xl">
-              Book Appointment
-            </Button>
-            <Button variant="elegant" size="xl">
-              Explore Services
-            </Button>
+            <a href="#contact">
+              <Button variant="gold" size="xl">
+                Book Appointment
+              </Button>
+            </a>
+            <a href="#services">
+              <Button variant="elegant" size="xl">
+                Explore Services
+              </Button>
+            </a>
           </div>
 
           {/* Trust Indicators */}
