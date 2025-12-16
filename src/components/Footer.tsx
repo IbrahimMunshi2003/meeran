@@ -7,8 +7,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="font-heading text-3xl font-semibold tracking-wide text-gradient-gold mb-4">
-              LUXE BEAUTY
+            <h3 className="font-heading text-2xl font-semibold tracking-wide text-gradient-gold mb-4">
+              Kanishka Beauty Parlour
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
               Experience the art of beauty transformation in an atmosphere of 
@@ -78,7 +78,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 Luxe Beauty. All rights reserved.
+            © 2024 Kanishka Beauty Parlour. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-muted-foreground text-sm hover:text-primary transition-colors">
