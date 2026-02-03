@@ -7,8 +7,9 @@ const Header = () => {
 
   const navLinks = [
     { name: "Services", href: "#services" },
-    { name: "About", href: "#about" },
     { name: "Gallery", href: "#gallery" },
+    { name: "Team", href: "#team" },
+    { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -38,9 +39,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="gold" size="default">
-              Book Now
-            </Button>
+            <a href="#booking">
+              <Button variant="gold" size="default">
+                Book Now
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -68,9 +71,11 @@ const Header = () => {
                 {link.name}
               </a>
             ))}
-            <Button variant="gold" size="lg" className="mt-4">
-              Book Now
-            </Button>
+            <a href="#booking" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="gold" size="lg" className="mt-4 w-full">
+                Book Now
+              </Button>
+            </a>
           </nav>
         </div>
       )}
