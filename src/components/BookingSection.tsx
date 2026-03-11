@@ -55,13 +55,14 @@ const BookingSection = () => {
     try {
       const formattedDate = format(date, "yyyy-MM-dd");
       const displayDate = format(date, "MMMM dd, yyyy");
+      const serviceName = services.find(s => s.value === service)?.label || service;
 
       // Save to database
       const { error: dbError } = await supabase.from("appointments").insert({
         customer_name: name,
         customer_email: email,
         customer_phone: phone,
-        service: services.find(s => s.value === service)?.label || service,
+        service: serviceName,
         appointment_date: formattedDate,
         appointment_time: time,
         notes: notes,
@@ -78,7 +79,7 @@ const BookingSection = () => {
           customerName: name,
           customerEmail: email,
           customerPhone: phone,
-          service: services.find(s => s.value === service)?.label || service,
+          service: serviceName,
           appointmentDate: displayDate,
           appointmentTime: time,
           notes: notes,
@@ -87,12 +88,17 @@ const BookingSection = () => {
 
       if (emailError) {
         console.error("Email error:", emailError);
-        // Don't throw - appointment was saved, just log email issue
       }
+
+      // Send details to WhatsApp
+      const whatsappNumber = "919789107963";
+      const message = `New Appointment Booking 📋\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone || "Not provided"}\n💇 Service: ${serviceName}\n📅 Date: ${displayDate}\n🕐 Time: ${time}\n📝 Notes: ${notes || "None"}`;
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
 
       toast({
         title: "✨ Appointment Booked Successfully!",
-        description: "A confirmation email has been sent to your inbox.",
+        description: "You'll be redirected to WhatsApp to confirm your booking.",
       });
 
       // Reset form
