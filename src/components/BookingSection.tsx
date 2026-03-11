@@ -58,8 +58,15 @@ const BookingSection = () => {
     const message = `New Appointment Booking\n\nName: ${name}\nPhone: ${phone || "Not provided"}\nService: ${serviceName}\nDate: ${displayDate}\nTime: ${time}`;
     const whatsappUrl = `https://wa.me/919789107963?text=${encodeURIComponent(message)}`;
 
-    // Redirect to WhatsApp IMMEDIATELY (synchronous, won't be blocked)
-    window.location.href = whatsappUrl;
+    // Open WhatsApp using anchor click (works in iframes and avoids popup blockers)
+    const anchor = document.createElement("a");
+    anchor.href = whatsappUrl;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    setTimeout(() => document.body.removeChild(anchor), 100);
 
     // Save to DB and send emails in the background (non-blocking)
     setIsSubmitting(true);
