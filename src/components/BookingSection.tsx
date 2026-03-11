@@ -38,7 +38,7 @@ const BookingSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name || !email || !service || !date || !time) {
@@ -50,82 +50,57 @@ const BookingSection = () => {
       return;
     }
 
+    const displayDate = format(date, "MMMM dd, yyyy");
+    const formattedDate = format(date, "yyyy-MM-dd");
+    const serviceName = services.find(s => s.value === service)?.label || service;
+
+    // Build WhatsApp message
+    const message = `New Appointment Booking\n\nName: ${name}\nPhone: ${phone || "Not provided"}\nService: ${serviceName}\nDate: ${displayDate}\nTime: ${time}`;
+    const whatsappUrl = `https://wa.me/919789107963?text=${encodeURIComponent(message)}`;
+
+    // Redirect to WhatsApp IMMEDIATELY (synchronous, won't be blocked)
+    window.location.href = whatsappUrl;
+
+    // Save to DB and send emails in the background (non-blocking)
     setIsSubmitting(true);
-
-    try {
-      const formattedDate = format(date, "yyyy-MM-dd");
-      const displayDate = format(date, "MMMM dd, yyyy");
-      const serviceName = services.find(s => s.value === service)?.label || service;
-
-      // Save to database
-      const { error: dbError } = await supabase.from("appointments").insert({
-        customer_name: name,
-        customer_email: email,
-        customer_phone: phone,
-        service: serviceName,
-        appointment_date: formattedDate,
-        appointment_time: time,
-        notes: notes,
-      });
-
-      if (dbError) {
-        console.error("Database error:", dbError);
-        throw new Error("Failed to save appointment");
-      }
-
-      // Send confirmation emails
-      const { error: emailError } = await supabase.functions.invoke("send-appointment-emails", {
-        body: {
-          customerName: name,
-          customerEmail: email,
-          customerPhone: phone,
+    (async () => {
+      try {
+        await supabase.from("appointments").insert({
+          customer_name: name,
+          customer_email: email,
+          customer_phone: phone,
           service: serviceName,
-          appointmentDate: displayDate,
-          appointmentTime: time,
+          appointment_date: formattedDate,
+          appointment_time: time,
           notes: notes,
-        },
-      });
+        });
 
-      if (emailError) {
-        console.error("Email error:", emailError);
+        await supabase.functions.invoke("send-appointment-emails", {
+          body: {
+            customerName: name,
+            customerEmail: email,
+            customerPhone: phone,
+            service: serviceName,
+            appointmentDate: displayDate,
+            appointmentTime: time,
+            notes: notes,
+          },
+        });
+      } catch (error) {
+        console.error("Background save error:", error);
+      } finally {
+        setIsSubmitting(false);
       }
+    })();
 
-      // Send details to WhatsApp
-      const whatsappNumber = "919789107963";
-      const message = `New Appointment Booking 📋\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone || "Not provided"}\n💇 Service: ${serviceName}\n📅 Date: ${displayDate}\n🕐 Time: ${time}\n📝 Notes: ${notes || "None"}`;
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      
-      // Use a temporary link to avoid popup blockers
-      const link = document.createElement("a");
-      link.href = whatsappUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      toast({
-        title: "✨ Appointment Booked Successfully!",
-        description: "You'll be redirected to WhatsApp to confirm your booking.",
-      });
-
-      // Reset form
-      setName("");
-      setEmail("");
-      setPhone("");
-      setService("");
-      setDate(undefined);
-      setTime("");
-      setNotes("");
-    } catch (error) {
-      console.error("Booking error:", error);
-      toast({
-        title: "Booking Failed",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+    // Reset form
+    setName("");
+    setEmail("");
+    setPhone("");
+    setService("");
+    setDate(undefined);
+    setTime("");
+    setNotes("");
     }
   };
 
