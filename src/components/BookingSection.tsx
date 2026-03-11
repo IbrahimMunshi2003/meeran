@@ -101,7 +101,6 @@ const BookingSection = () => {
     setDate(undefined);
     setTime("");
     setNotes("");
-    }
   };
 
   return (
