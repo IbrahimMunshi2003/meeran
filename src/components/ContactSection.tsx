@@ -79,83 +79,28 @@ const ContactSection = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-background p-8 md:p-12 border border-border">
-            <h3 className="font-heading text-2xl mb-6">Request an Appointment</h3>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-body tracking-wider uppercase text-muted-foreground mb-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-card border border-border px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Your first name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-body tracking-wider uppercase text-muted-foreground mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-card border border-border px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Your last name"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-body tracking-wider uppercase text-muted-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full bg-card border border-border px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-body tracking-wider uppercase text-muted-foreground mb-2">
-                  Service Interested In
-                </label>
-                <select className="w-full bg-card border border-border px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors appearance-none">
-                  <option value="">Select a service</option>
-                  <option value="skincare">Skin Care</option>
-                  <option value="hair">Hair Styling</option>
-                  <option value="makeup">Makeup Artistry</option>
-                  <option value="spa">Spa Treatments</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-body tracking-wider uppercase text-muted-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full bg-card border border-border px-4 py-3 text-foreground focus:border-primary focus:outline-none transition-colors resize-none"
-                  placeholder="Tell us about your beauty goals..."
-                />
-              </div>
-
-              <Button
-                type="button"
-                variant="gold"
-                size="lg"
-                className="w-full"
-                onClick={() => {
-                  toast({
-                    title: "Appointment booked successfully!",
-                    description: "We will contact you shortly to confirm your appointment.",
-                  });
-                }}
-              >
-                Send Request
+          {/* Map / Additional Info */}
+          <div className="bg-background p-8 md:p-12 border border-border flex flex-col justify-center">
+            <h3 className="font-heading text-2xl mb-6">Find Us</h3>
+            <div className="w-full h-64 bg-muted mb-6 flex items-center justify-center border border-border">
+              <iframe
+                title="Salon Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203584424!2d-118.40853!3d34.06907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA0JzA4LjciTiAxMTjCsDI0JzMwLjciVw!5e0!3m2!1sen!2sus!4v1234567890"
+                className="w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Located in the heart of Beverly Hills, our salon offers a serene escape 
+              from the everyday. Visit us for a complimentary consultation.
+            </p>
+            <a href="#booking" className="mt-6 inline-block">
+              <Button variant="gold" size="lg">
+                Book an Appointment
               </Button>
-            </form>
+            </a>
           </div>
         </div>
       </div>
