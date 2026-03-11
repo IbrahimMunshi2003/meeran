@@ -94,7 +94,15 @@ const BookingSection = () => {
       const whatsappNumber = "919789107963";
       const message = `New Appointment Booking 📋\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone || "Not provided"}\n💇 Service: ${serviceName}\n📅 Date: ${displayDate}\n🕐 Time: ${time}\n📝 Notes: ${notes || "None"}`;
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, "_blank");
+      
+      // Use a temporary link to avoid popup blockers
+      const link = document.createElement("a");
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
       toast({
         title: "✨ Appointment Booked Successfully!",
