@@ -59,7 +59,7 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-heading text-lg mb-1">Email Us</h4>
                   <p className="text-muted-foreground text-sm">
-                    hello@luxebeauty.com
+                    <br />
                   </p>
                 </div>
               </div>
