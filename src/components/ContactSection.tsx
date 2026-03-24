@@ -34,8 +34,8 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-heading text-lg mb-1">Visit Us</h4>
                   <p className="text-muted-foreground text-sm">
-                    123 Luxury Lane, Beverly Hills<br />
-                    CA 90210, United States
+                    339/ Thamarai street, Gomathipuram,<br />
+                    Madurai-625020
                   </p>
                 </div>
               </div>
@@ -47,7 +47,7 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-heading text-lg mb-1">Call Us</h4>
                   <p className="text-muted-foreground text-sm">
-                    +1 (310) 555-0123
+                    <br />
                   </p>
                 </div>
               </div>
@@ -59,7 +59,7 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-heading text-lg mb-1">Email Us</h4>
                   <p className="text-muted-foreground text-sm">
-                    hello@luxebeauty.com
+                    <br />
                   </p>
                 </div>
               </div>
