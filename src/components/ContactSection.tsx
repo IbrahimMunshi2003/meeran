@@ -85,7 +85,7 @@ const ContactSection = () => {
             <div className="w-full h-64 bg-muted mb-6 flex items-center justify-center border border-border">
               <iframe
                 title="Salon Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203584424!2d-118.40853!3d34.06907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA0JzA4LjciTiAxMTjCsDI0JzMwLjciVw!5e0!3m2!1sen!2sus!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.0!2d78.157652!3d9.923865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sen!2sin!4v1234567890"
                 className="w-full h-full border-0"
                 allowFullScreen
                 loading="lazy"
