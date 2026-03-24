@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import emailjs from "@emailjs/browser";
 
 const services = [
   { value: "skin-care", label: "Skin Care", price: "From ₹2,500" },
