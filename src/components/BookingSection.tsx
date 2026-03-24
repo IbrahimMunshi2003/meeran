@@ -55,13 +55,9 @@ const BookingSection = () => {
     const formattedDate = format(date, "yyyy-MM-dd");
     const serviceName = services.find(s => s.value === service)?.label || service;
 
-    // Open WhatsApp immediately (avoids popup blocker)
-    const message = `New Appointment Booking\n\nName: ${name}\nPhone: ${phone || "Not provided"}\nService: ${serviceName}\nDate: ${displayDate}\nTime: ${time}`;
-    const whatsappUrl = `https://wa.me/919789107963?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setIsSubmitting(true);
 
     // Send email via EmailJS
-    setIsSubmitting(true);
     emailjs.send(
       "service_oyrizjc",
       "template_k5ythm8",
