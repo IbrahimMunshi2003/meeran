@@ -55,22 +55,41 @@ const BookingSection = () => {
     const formattedDate = format(date, "yyyy-MM-dd");
     const serviceName = services.find(s => s.value === service)?.label || service;
 
-    // Build WhatsApp message
+    // Open WhatsApp immediately (avoids popup blocker)
     const message = `New Appointment Booking\n\nName: ${name}\nPhone: ${phone || "Not provided"}\nService: ${serviceName}\nDate: ${displayDate}\nTime: ${time}`;
     const whatsappUrl = `https://wa.me/919789107963?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-    // Open WhatsApp using anchor click (works in iframes and avoids popup blockers)
-    const anchor = document.createElement("a");
-    anchor.href = whatsappUrl;
-    anchor.target = "_blank";
-    anchor.rel = "noopener noreferrer";
-    anchor.style.display = "none";
-    document.body.appendChild(anchor);
-    anchor.click();
-    setTimeout(() => document.body.removeChild(anchor), 100);
-
-    // Save to DB and send emails in the background (non-blocking)
+    // Send email via EmailJS
     setIsSubmitting(true);
+    emailjs.send(
+      "service_oyrizjc",
+      "template_k5ythm8",
+      {
+        name,
+        email,
+        phone: phone || "Not provided",
+        service: serviceName,
+        date: displayDate,
+        time,
+        message: notes || "No special requests",
+      },
+      "YHoDfB69sjUJaJWKi"
+    ).then(() => {
+      toast({
+        title: "Appointment Booked ✅",
+        description: "Confirmation email sent successfully!",
+      });
+    }).catch((error) => {
+      console.error("EmailJS error:", error);
+      toast({
+        title: "Booking saved",
+        description: "WhatsApp message sent but email confirmation failed.",
+        variant: "destructive",
+      });
+    });
+
+    // Save to DB in background
     (async () => {
       try {
         await supabase.from("appointments").insert({
@@ -82,20 +101,8 @@ const BookingSection = () => {
           appointment_time: time,
           notes: notes,
         });
-
-        await supabase.functions.invoke("send-appointment-emails", {
-          body: {
-            customerName: name,
-            customerEmail: email,
-            customerPhone: phone,
-            service: serviceName,
-            appointmentDate: displayDate,
-            appointmentTime: time,
-            notes: notes,
-          },
-        });
       } catch (error) {
-        console.error("Background save error:", error);
+        console.error("DB save error:", error);
       } finally {
         setIsSubmitting(false);
       }
